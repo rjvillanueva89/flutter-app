@@ -1,3 +1,4 @@
+import 'package:first_app/src/components/_button.dart';
 import 'package:first_app/src/components/gradient_container.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +16,30 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(
-        body: GradientContainer(),
+      home: Scaffold(
+        body: GradientContainer(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Button(
+                  label: "Click Me",
+                  onPress: () {
+                    print('Button pressed from App!');
+                  },
+                  // Or you can omit the onPress parameter entirely
+                ),
+                const Text(
+                  "Some text",
+                  style: TextStyle(
+                    fontSize: 28,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

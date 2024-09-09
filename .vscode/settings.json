@@ -13,6 +13,7 @@
   },
   "[dart]": {
     "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.suggest.insertMode": "insert",
     "editor.codeActionsOnSave": {
       "quickfix.insertSemicolon": "always"
     }

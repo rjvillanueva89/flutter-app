@@ -1,5 +1,6 @@
-import 'package:first_app/src/components/_button.dart';
-import 'package:first_app/src/components/gradient_container.dart';
+import 'package:first_app/src/widgets/_button.dart';
+import 'package:first_app/src/widgets/gradient_container.dart';
+import 'package:first_app/src/widgets/styled_text.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,24 +19,18 @@ class App extends StatelessWidget {
       ),
       home: Scaffold(
         body: GradientContainer(
+          gradientColors: const [Colors.green, Colors.blue],
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Button(
-                  label: "Click Me",
+                  label: "Click Me Updated",
                   onPress: () {
                     print('Button pressed from App!');
                   },
-                  // Or you can omit the onPress parameter entirely
                 ),
-                const Text(
-                  "Some text",
-                  style: TextStyle(
-                    fontSize: 28,
-                    color: Colors.white,
-                  ),
-                )
+                const StyledText("Hello World!")
               ],
             ),
           ),

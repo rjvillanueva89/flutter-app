@@ -24,13 +24,17 @@ class App extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const StyledText("Roll the Dice!"),
+                Image.asset(
+                  "assets/images/dice-6.png",
+                  width: 200,
+                ),
                 Button(
-                  label: "Click Me Updated",
-                  onPress: () {
+                  label: "ROLL",
+                  onPressed: () {
                     print('Button pressed from App!');
                   },
                 ),
-                const StyledText("Hello World!")
               ],
             ),
           ),

@@ -12,7 +12,10 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[dart]": {
-    "editor.defaultFormatter": "Dart-Code.dart-code"
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.codeActionsOnSave": {
+      "quickfix.insertSemicolon": "always"
+    }
   },
   "editor.formatOnSave": true,
   "editor.tabSize": 2,

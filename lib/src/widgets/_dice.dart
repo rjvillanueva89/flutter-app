@@ -14,20 +14,11 @@ class Dice extends StatefulWidget {
 }
 
 class _DiceState extends State<Dice> {
-  var active = Random().nextInt(6);
-  var dices = [
-    "assets/images/dice-1.png",
-    "assets/images/dice-2.png",
-    "assets/images/dice-3.png",
-    "assets/images/dice-4.png",
-    "assets/images/dice-5.png",
-    "assets/images/dice-6.png"
-  ];
+  var active = Random().nextInt(6) + 1;
 
   void handlePress() {
-    print("rolling");
     setState(() {
-      active = Random().nextInt(6);
+      active = Random().nextInt(6) + 1;
     });
   }
 
@@ -39,7 +30,7 @@ class _DiceState extends State<Dice> {
         children: [
           const StyledText("Roll the Dice!"),
           Image.asset(
-            dices[active],
+            "assets/images/dice-$active.png",
             width: 200,
           ),
           Button(

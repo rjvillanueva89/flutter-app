@@ -1,5 +1,5 @@
-import 'package:first_app/src/widgets/_quiz.dart';
 import 'package:first_app/src/widgets/gradient_container.dart';
+import 'package:first_app/src/widgets/quiz_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class App extends StatelessWidget {
       home: Scaffold(
         body: GradientContainer(
           gradientColors: [Colors.purple.shade900, Colors.purple.shade700],
-          child: const Quiz(),
+          child: const QuizScreen(),
         ),
       ),
     );

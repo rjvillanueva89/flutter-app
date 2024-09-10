@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Quiz extends StatelessWidget {
-  const Quiz({super.key});
+class QuizScreen extends StatelessWidget {
+  const QuizScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +23,21 @@ class Quiz extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          const Button()
+          const StartButton()
         ],
       ),
     );
   }
 }
 
-class Button extends StatelessWidget {
-  const Button({super.key});
+class StartButton extends StatelessWidget {
+  const StartButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.purple.shade800,
+          backgroundColor: Colors.purple.shade700,
           foregroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(5)),

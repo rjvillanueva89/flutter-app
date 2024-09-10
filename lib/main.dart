@@ -1,6 +1,5 @@
-import 'package:first_app/src/widgets/_button.dart';
+import 'package:first_app/src/widgets/_dice.dart';
 import 'package:first_app/src/widgets/gradient_container.dart';
-import 'package:first_app/src/widgets/styled_text.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,24 +19,7 @@ class App extends StatelessWidget {
       home: Scaffold(
         body: GradientContainer(
           gradientColors: const [Colors.green, Colors.blue],
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const StyledText("Roll the Dice!"),
-                Image.asset(
-                  "assets/images/dice-6.png",
-                  width: 200,
-                ),
-                Button(
-                  label: "ROLL",
-                  onPressed: () {
-                    print('Button pressed from App!');
-                  },
-                ),
-              ],
-            ),
-          ),
+          child: const Dice(),
         ),
       ),
     );

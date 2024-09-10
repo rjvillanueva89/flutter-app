@@ -8,7 +8,15 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return TextButton(
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+        textStyle: const TextStyle(
+          fontSize: 24,
+        ),
+      ),
       onPressed: onPressed,
       child: Text(label),
     );

@@ -18,7 +18,7 @@ class App extends StatelessWidget {
       ),
       home: Scaffold(
         body: GradientContainer(
-          gradientColors: const [Colors.deepPurple, Colors.purple],
+          gradientColors: [Colors.purple.shade900, Colors.purple.shade700],
           child: const Quiz(),
         ),
       ),

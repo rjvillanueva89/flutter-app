@@ -1,4 +1,4 @@
-import 'package:first_app/src/widgets/_dice.dart';
+import 'package:first_app/src/widgets/_quiz.dart';
 import 'package:first_app/src/widgets/gradient_container.dart';
 import 'package:flutter/material.dart';
 
@@ -18,8 +18,8 @@ class App extends StatelessWidget {
       ),
       home: Scaffold(
         body: GradientContainer(
-          gradientColors: const [Colors.green, Colors.blue],
-          child: const Dice(),
+          gradientColors: const [Colors.deepPurple, Colors.purple],
+          child: const Quiz(),
         ),
       ),
     );

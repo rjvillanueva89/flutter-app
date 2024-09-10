@@ -16,6 +16,9 @@ class Button extends StatelessWidget {
         textStyle: const TextStyle(
           fontSize: 24,
         ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
       ),
       onPressed: onPressed,
       child: Text(label),

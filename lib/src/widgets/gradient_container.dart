@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-class GradientContainer extends Container {
-  GradientContainer({
+class GradientContainer extends StatelessWidget {
+  const GradientContainer({
     super.key,
-    super.child,
+    required this.child,
     required this.gradientColors,
   });
 
+  final Widget child;
   final List<Color> gradientColors;
 
   @override

@@ -9,9 +9,12 @@ class QuizScreen extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(
-            "assets/images/quiz-logo.png",
-            width: 300,
+          Opacity(
+            opacity: 0.75,
+            child: Image.asset(
+              "assets/images/quiz-logo.png",
+              width: 300,
+            ),
           ),
           const SizedBox(height: 40),
           const Text(
@@ -37,7 +40,7 @@ class StartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
           backgroundColor: Colors.purple.shade700,
           foregroundColor: Colors.white,
@@ -45,7 +48,8 @@ class StartButton extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(5)),
           )),
       onPressed: () {},
-      child: const Text("Start Quiz"),
+      icon: const Icon(Icons.arrow_right),
+      label: const Text("Start Quiz"),
     );
   }
 }

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class GradientContainer extends StatelessWidget {
   const GradientContainer({
     super.key,
-    required this.child,
+    this.child,
     required this.gradientColors,
   });
 
-  final Widget child;
+  final Widget? child;
   final List<Color> gradientColors;
 
   @override

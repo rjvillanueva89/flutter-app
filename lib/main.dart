@@ -1,5 +1,4 @@
-import 'package:first_app/src/widgets/gradient_container.dart';
-import 'package:first_app/src/widgets/quiz_screen.dart';
+import 'package:first_app/src/widgets/quiz.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,17 +10,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Flutter App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        body: GradientContainer(
-          gradientColors: [Colors.purple.shade900, Colors.purple.shade700],
-          child: const QuizScreen(),
-        ),
-      ),
-    );
+    return const Quiz();
   }
 }

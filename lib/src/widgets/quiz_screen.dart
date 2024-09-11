@@ -17,7 +17,7 @@ class QuizScreen extends StatelessWidget {
           const Text(
             "Learn Flutter the fun way!",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 24,
               color: Colors.white,
               fontWeight: FontWeight.w300,
             ),
@@ -31,7 +31,9 @@ class QuizScreen extends StatelessWidget {
 }
 
 class StartButton extends StatelessWidget {
-  const StartButton({super.key});
+  const StartButton({super.key, this.onPressed});
+
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {

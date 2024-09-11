@@ -1,25 +1,13 @@
 {
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[dart]": {
     "editor.defaultFormatter": "Dart-Code.dart-code",
-    "editor.suggest.insertMode": "insert",
     "editor.codeActionsOnSave": {
       "quickfix.insertSemicolon": "always",
-      "source.organizeImports": "always"
+      "source.organizeImports": "always",
+      "source.fixAll": "explicit"
     }
   },
+  "editor.suggest.insertMode": "insert",
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
-  "prettier.tabWidth": 2
 }

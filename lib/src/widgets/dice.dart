@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:first_app/src/widgets/_button.dart';
+import 'package:first_app/src/widgets/button.dart';
 import 'package:first_app/src/widgets/styled_text.dart';
 import 'package:flutter/material.dart';
 

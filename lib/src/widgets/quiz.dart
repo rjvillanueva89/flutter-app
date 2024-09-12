@@ -2,6 +2,7 @@ import 'package:first_app/src/widgets/gradient_container.dart';
 import 'package:first_app/src/widgets/questions_screen.dart';
 import 'package:first_app/src/widgets/start_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -13,35 +14,50 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  int active = 0;
+  List<String> answers = [];
+  var active = "start-screen";
 
   @override
   void initState() {
     super.initState();
-    active = 0;
+    active = "start-screen";
   }
 
-  void handleNext() {
+  void showQuestionsScreen() {
     setState(() {
-      active = active + 1;
+      active = "questions-screen";
     });
   }
 
-  void handlePrev() {
+  void showResultScreen() {
     setState(() {
-      active = active - 1;
+      active = "result-screen";
     });
+  }
+
+  void handleSelectAnswer(String answer) {
+    // answers = [...answers, answer];
+    answers.add(answer);
   }
 
   @override
   Widget build(BuildContext context) {
-    final screenWidget =
-        active == 0 ? StartScreen(onNext: handleNext) : const QuestionsScreen();
+    final screens = {
+      "start-screen": StartScreen(onPressed: showQuestionsScreen),
+      "questions-screen": QuestionsScreen(
+        onSelectAnswer: handleSelectAnswer,
+        onFinished: showResultScreen,
+      ),
+      "result-screen": const Text("Results"),
+    };
+
+    final screenWidget = screens[active];
 
     return MaterialApp(
       title: 'My Flutter App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.latoTextTheme(),
       ),
       home: Scaffold(
         body: GradientContainer(

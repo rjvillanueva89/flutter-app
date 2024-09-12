@@ -3,7 +3,14 @@ import 'package:first_app/src/models/quiz_question.dart';
 import 'package:flutter/material.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({
+    super.key,
+    required this.onSelectAnswer,
+    required this.onFinished,
+  });
+
+  final void Function(String answer) onSelectAnswer;
+  final VoidCallback onFinished;
 
   @override
   State<QuestionsScreen> createState() {
@@ -14,7 +21,14 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String selectedAnswer) {
+    if (currentQuestionIndex >= questions.length - 1) {
+      widget.onFinished();
+      return;
+    }
+
+    widget.onSelectAnswer(selectedAnswer);
+
     setState(() {
       currentQuestionIndex++;
     });
@@ -27,7 +41,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       return AnswerButton(
         label: answer,
         onPressed: () {
-          answerQuestion();
+          answerQuestion(answer);
         },
       );
     }).toList();
@@ -43,8 +57,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             Text(
               current.text,
               style: const TextStyle(
-                color: Colors.white,
+                color: Color.fromARGB(200, 255, 255, 255),
                 fontSize: 26,
+                fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
@@ -79,7 +94,10 @@ class AnswerButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text(label),
+      child: Text(
+        label,
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }

@@ -13,22 +13,31 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget? activeScreen;
+  int active = 0;
 
   @override
   void initState() {
     super.initState();
-    activeScreen = StartScreen(onPressed: switchScreen);
+    active = 0;
   }
 
-  void switchScreen() {
+  void handleNext() {
     setState(() {
-      activeScreen = const QuestionsScreen();
+      active = active + 1;
+    });
+  }
+
+  void handlePrev() {
+    setState(() {
+      active = active - 1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidget =
+        active == 0 ? StartScreen(onNext: handleNext) : const QuestionsScreen();
+
     return MaterialApp(
       title: 'My Flutter App',
       theme: ThemeData(
@@ -37,7 +46,7 @@ class _QuizState extends State<Quiz> {
       home: Scaffold(
         body: GradientContainer(
           gradientColors: [Colors.purple.shade900, Colors.purple.shade700],
-          child: activeScreen,
+          child: screenWidget,
         ),
       ),
     );

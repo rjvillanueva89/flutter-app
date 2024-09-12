@@ -12,41 +12,46 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
-  final QuizQuestion current = questions[0];
+  var currentQuestionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+      currentQuestionIndex++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final QuizQuestion current = questions[currentQuestionIndex];
+    final answerButtons = current.getShuffledAnswers().map((answer) {
+      return AnswerButton(
+        label: answer,
+        onPressed: () {
+          answerQuestion();
+        },
+      );
+    }).toList();
+
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            current.text,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 30,
+      child: Container(
+        margin: const EdgeInsets.all(40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              current.text,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 26,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 30),
-          AnswerButton(
-            label: current.answers[0],
-            onPressed: () {},
-          ),
-          AnswerButton(
-            label: current.answers[1],
-            onPressed: () {},
-          ),
-          AnswerButton(
-            label: current.answers[2],
-            onPressed: () {},
-          ),
-          AnswerButton(
-            label: current.answers[3],
-            onPressed: () {},
-          ),
-        ],
+            const SizedBox(height: 30),
+            ...answerButtons
+          ],
+        ),
       ),
     );
   }
@@ -73,7 +78,7 @@ class AnswerButton extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(40)),
         ),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Text(label),
     );
   }

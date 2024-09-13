@@ -37,14 +37,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   Widget build(BuildContext context) {
     final QuizQuestion current = questions[currentQuestionIndex];
-    final answerButtons = current.getShuffledAnswers().map((answer) {
-      return AnswerButton(
-        label: answer,
-        onPressed: () {
-          answerQuestion(answer);
-        },
-      );
-    }).toList();
+    final answerButtons = current
+        .getShuffledAnswers()
+        .map((answer) => AnswerButton(
+              label: answer,
+              onPressed: () {
+                answerQuestion(answer);
+              },
+            ))
+        .toList();
 
     return SizedBox(
       width: double.infinity,

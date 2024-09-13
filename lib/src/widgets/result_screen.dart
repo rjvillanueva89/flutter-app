@@ -1,4 +1,6 @@
 import 'package:first_app/src/data/questions.dart';
+import 'package:first_app/src/models/summary_data.dart';
+import 'package:first_app/src/widgets/questions_summary.dart';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -8,16 +10,16 @@ class ResultScreen extends StatelessWidget {
   final VoidCallback onReset;
   final questionsCount = questions.length;
 
-  List<Map<String, Object>> getSummaryData() {
-    final List<Map<String, Object>> summary = [];
+  List<SummaryData> getSummaryData() {
+    final List<SummaryData> summary = [];
 
     for (var i = 0; i < answers.length; i++) {
-      summary.add({
-        'index': i,
-        'question': questions[i].text,
-        'correct_answer': questions[i].answers[0],
-        'user_answer': answers[i],
-      });
+      summary.add(SummaryData(
+        index: i,
+        question: questions[i].text,
+        correctAnswers: questions[i].answers[0],
+        userAnswer: answers[i],
+      ));
     }
 
     return summary;
@@ -25,27 +27,30 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final list = getSummaryData();
-
-    print(list);
+    final summaryData = getSummaryData();
+    final totalQuestions = questions.length;
+    final totalCorrectAnswers = summaryData
+        .where((data) => data.correctAnswers == data.userAnswer)
+        .length;
 
     return Container(
       margin: const EdgeInsets.all(40),
       width: double.infinity,
       // decoration: const BoxDecoration(color: Colors.black),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "You answered X out of Y questions correctly!",
+          Text(
+            "You answered $totalCorrectAnswers out of $totalQuestions questions correctly!",
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(200, 255, 255, 255),
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 30),
+          QuestionsSummary(summaryData),
           TextButton(
             onPressed: onReset,
             child: const Text(
@@ -55,7 +60,7 @@ class ResultScreen extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

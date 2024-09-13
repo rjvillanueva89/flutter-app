@@ -34,7 +34,7 @@ class _QuizState extends State<Quiz> {
     answers.add(answer);
   }
 
-  void resetAnswers() {
+  void resetQuiz() {
     setState(() {
       answers = [];
     });
@@ -56,7 +56,7 @@ class _QuizState extends State<Quiz> {
           answers: answers,
           onReset: () {
             setScreen("start-screen");
-            resetAnswers();
+            resetQuiz();
           }),
     };
 

@@ -1,5 +1,6 @@
 import 'package:first_app/src/widgets/gradient_container.dart';
 import 'package:first_app/src/widgets/questions_screen.dart';
+import 'package:first_app/src/widgets/result_screen.dart';
 import 'package:first_app/src/widgets/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,38 +18,47 @@ class _QuizState extends State<Quiz> {
   List<String> answers = [];
   var active = "start-screen";
 
-  @override
-  void initState() {
-    super.initState();
-    active = "start-screen";
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   active = "start-screen";
+  // }
 
-  void showQuestionsScreen() {
+  void setScreen(String screen) {
     setState(() {
-      active = "questions-screen";
-    });
-  }
-
-  void showResultScreen() {
-    setState(() {
-      active = "result-screen";
+      active = screen;
     });
   }
 
   void handleSelectAnswer(String answer) {
-    // answers = [...answers, answer];
     answers.add(answer);
+    print(answers);
+  }
+
+  void resetAnswers() {
+    setState(() {
+      answers = [];
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final screens = {
-      "start-screen": StartScreen(onPressed: showQuestionsScreen),
+      "start-screen": StartScreen(onPressed: () {
+        setScreen("questions-screen");
+      }),
       "questions-screen": QuestionsScreen(
         onSelectAnswer: handleSelectAnswer,
-        onFinished: showResultScreen,
+        onFinished: () {
+          setScreen("result-screen");
+        },
       ),
-      "result-screen": const Text("Results"),
+      "result-screen": ResultScreen(
+          answers: answers,
+          onReset: () {
+            setScreen("start-screen");
+            resetAnswers();
+          }),
     };
 
     final screenWidget = screens[active];

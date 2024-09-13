@@ -30,9 +30,8 @@ class _QuizState extends State<Quiz> {
     });
   }
 
-  void handleSelectAnswer(String answer) {
+  void onSelectAnswer(String answer) {
     answers.add(answer);
-    print(answers);
   }
 
   void resetAnswers() {
@@ -48,7 +47,7 @@ class _QuizState extends State<Quiz> {
         setScreen("questions-screen");
       }),
       "questions-screen": QuestionsScreen(
-        onSelectAnswer: handleSelectAnswer,
+        onSelectAnswer: onSelectAnswer,
         onFinished: () {
           setScreen("result-screen");
         },
@@ -61,7 +60,7 @@ class _QuizState extends State<Quiz> {
           }),
     };
 
-    final screenWidget = screens[active];
+    final activeScreen = screens[active];
 
     return MaterialApp(
       title: 'My Flutter App',
@@ -72,7 +71,7 @@ class _QuizState extends State<Quiz> {
       home: Scaffold(
         body: GradientContainer(
           gradientColors: [Colors.purple.shade900, Colors.purple.shade700],
-          child: screenWidget,
+          child: activeScreen,
         ),
       ),
     );

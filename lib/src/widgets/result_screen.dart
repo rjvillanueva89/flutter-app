@@ -8,30 +8,26 @@ class ResultScreen extends StatelessWidget {
   final VoidCallback onReset;
   final questionsCount = questions.length;
 
+  List<Map<String, Object>> getSummaryData() {
+    final List<Map<String, Object>> summary = [];
+
+    for (var i = 0; i < answers.length; i++) {
+      summary.add({
+        'index': i,
+        'question': questions[i].text,
+        'correct_answer': questions[i].answers[0],
+        'user_answer': answers[i],
+      });
+    }
+
+    return summary;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final list = questions.map((question) {
-      var index = questions.indexOf(question);
-      var label = Container(
-        decoration: BoxDecoration(
-          color: Colors.purple.shade700,
-          borderRadius: const BorderRadius.all(Radius.circular(100)),
-        ),
-        height: 50,
-        width: 50,
-        child: Center(
-          child: Text(
-            (index + 1).toString(),
-            style: const TextStyle(color: Colors.white, fontSize: 18),
-          ),
-        ),
-      );
-      var content = const SizedBox();
+    final list = getSummaryData();
 
-      return Row(
-        children: [label, const SizedBox(width: 20), content],
-      );
-    }).toList();
+    print(list);
 
     return Container(
       margin: const EdgeInsets.all(40),
@@ -50,10 +46,15 @@ class ResultScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 30),
-          ...list,
           TextButton(
             onPressed: onReset,
-            child: const Text("Reset"),
+            child: const Text(
+              "Reset",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+              ),
+            ),
           )
         ],
       ),

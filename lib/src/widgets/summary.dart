@@ -1,8 +1,8 @@
 import 'package:first_app/src/models/summary_data.dart';
 import 'package:flutter/material.dart';
 
-class QuestionsSummary extends StatelessWidget {
-  const QuestionsSummary(this.summaryData, {super.key});
+class Summary extends StatelessWidget {
+  const Summary(this.summaryData, {super.key});
 
   final List<SummaryData> summaryData;
 

@@ -1,6 +1,6 @@
 import 'package:first_app/src/data/questions.dart';
 import 'package:first_app/src/models/summary_data.dart';
-import 'package:first_app/src/widgets/questions_summary.dart';
+import 'package:first_app/src/widgets/summary.dart';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -49,7 +49,7 @@ class ResultScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 30),
-          QuestionsSummary(summaryData),
+          Summary(summaryData),
           const SizedBox(height: 30),
           TextButton.icon(
             onPressed: onReset,

@@ -19,7 +19,7 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
-  var currentQuestionIndex = 0;
+  int currentQuestionIndex = 0;
 
   void answerQuestion(String selectedAnswer) {
     widget.onSelectAnswer(selectedAnswer);
@@ -37,9 +37,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   Widget build(BuildContext context) {
     final QuizQuestion current = questions[currentQuestionIndex];
-    final answerButtons = current
-        .getShuffledAnswers()
-        .map((answer) => AnswerButton(
+    final answerButtons = current.shuffledAnswers
+        .map((answer) => _AnswerButton(
               label: answer,
               onPressed: () {
                 answerQuestion(answer);
@@ -73,9 +72,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   }
 }
 
-class AnswerButton extends StatelessWidget {
-  const AnswerButton({
-    super.key,
+class _AnswerButton extends StatelessWidget {
+  const _AnswerButton({
     required this.label,
     required this.onPressed,
   });

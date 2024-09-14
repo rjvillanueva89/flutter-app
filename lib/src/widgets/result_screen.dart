@@ -10,7 +10,7 @@ class ResultScreen extends StatelessWidget {
   final VoidCallback onReset;
   final questionsCount = questions.length;
 
-  List<SummaryData> getSummaryData() {
+  List<SummaryData> get summaryData {
     final List<SummaryData> summary = [];
 
     for (var i = 0; i < answers.length; i++) {
@@ -27,7 +27,7 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final summaryData = getSummaryData();
+    // final summaryData = getSummaryData();
     final totalQuestions = questions.length;
     final totalCorrectAnswers = summaryData
         .where((data) => data.correctAnswers == data.userAnswer)

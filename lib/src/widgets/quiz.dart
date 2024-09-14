@@ -1,7 +1,7 @@
 import 'package:first_app/src/widgets/gradient_container.dart';
-import 'package:first_app/src/widgets/questions_screen.dart';
-import 'package:first_app/src/widgets/result_screen.dart';
-import 'package:first_app/src/widgets/start_screen.dart';
+import 'package:first_app/src/widgets/quiz/questions_screen.dart';
+import 'package:first_app/src/widgets/quiz/result_screen.dart';
+import 'package:first_app/src/widgets/quiz/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

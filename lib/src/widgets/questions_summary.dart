@@ -13,7 +13,7 @@ class QuestionsSummary extends StatelessWidget {
         children: summaryData.map((data) {
           bool isCorrect = data.correctAnswers == data.userAnswer;
 
-          return Container(
+          return Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Row(
               mainAxisSize: MainAxisSize.max,

@@ -36,7 +36,6 @@ class ResultScreen extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(40),
       width: double.infinity,
-      // decoration: const BoxDecoration(color: Colors.black),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -51,6 +50,7 @@ class ResultScreen extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           QuestionsSummary(summaryData),
+          const SizedBox(height: 30),
           TextButton.icon(
             onPressed: onReset,
             icon: const Icon(

@@ -27,23 +27,34 @@ class _DiceState extends State<Dice> {
 
   @override
   Widget build(BuildContext context) {
-    return GradientContainer(
-      gradientColors: [Colors.purple.shade900, Colors.purple.shade700],
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const StyledText("Roll the Dice!"),
-            Image.asset(
-              "assets/images/dice-$active.png",
-              width: 200,
+    return MaterialApp(
+      title: 'Dice App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        body: GradientContainer(
+          gradientColors: [Colors.purple.shade900, Colors.purple.shade700],
+          child: GradientContainer(
+            gradientColors: [Colors.purple.shade900, Colors.purple.shade700],
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const StyledText("Roll the Dice!"),
+                  Image.asset(
+                    "assets/images/dice-$active.png",
+                    width: 200,
+                  ),
+                  const SizedBox(height: 20),
+                  Button(
+                    label: "ROLL",
+                    onPressed: handlePress,
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 20),
-            Button(
-              label: "ROLL",
-              onPressed: handlePress,
-            ),
-          ],
+          ),
         ),
       ),
     );

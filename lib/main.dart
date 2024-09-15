@@ -1,4 +1,4 @@
-import 'package:first_app/src/widgets/quiz.dart';
+import 'package:first_app/src/widgets/expense_tracker.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,6 +10,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Quiz();
+    return const ExpenseTracker();
   }
 }

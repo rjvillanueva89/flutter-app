@@ -63,7 +63,7 @@ class _QuizState extends State<Quiz> {
     final activeScreen = screens[active];
 
     return MaterialApp(
-      title: 'My Flutter App',
+      title: 'Quiz App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.latoTextTheme(),

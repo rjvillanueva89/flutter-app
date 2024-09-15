@@ -1,5 +1,5 @@
-class Expense {
-  const Expense({
+class ExpenseData {
+  const ExpenseData({
     required this.label,
     required this.amount,
     required this.createdAt,

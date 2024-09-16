@@ -1,4 +1,5 @@
 import 'package:first_app/src/models/expense_data.dart';
+import 'package:first_app/src/widgets/expense_tracker/expense_form.dart';
 import 'package:first_app/src/widgets/expense_tracker/expense_list.dart';
 import 'package:flutter/material.dart';
 
@@ -27,10 +28,10 @@ class _ExpensesState extends State<Expenses> {
     )
   ];
 
-  void _openExpenseModal() {
+  void _openModal() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const Text("Expense Modal"),
+      builder: (ctx) => const ExpenseForm(),
     );
   }
 
@@ -47,7 +48,7 @@ class _ExpensesState extends State<Expenses> {
         ),
         actions: [
           IconButton(
-            onPressed: _openExpenseModal,
+            onPressed: _openModal,
             icon: Icon(
               Icons.add,
               color: Colors.deepPurple.shade100,

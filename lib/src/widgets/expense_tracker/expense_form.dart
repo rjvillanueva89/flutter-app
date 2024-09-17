@@ -1,9 +1,12 @@
 import 'package:first_app/src/models/expense_data.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:zod_validation/zod_validation.dart';
 
 class ExpenseForm extends StatefulWidget {
-  const ExpenseForm({super.key});
+  const ExpenseForm({super.key, required this.onSubmit});
+
+  final void Function(ExpenseData item) onSubmit;
 
   @override
   State<ExpenseForm> createState() => _ExpenseFormState();
@@ -41,10 +44,18 @@ class _ExpenseFormState extends State<ExpenseForm> {
   }
 
   void _handleSubmit() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      print(_formValues);
-    }
+    if (!_formKey.currentState!.validate()) return;
+
+    _formKey.currentState!.save();
+
+    widget.onSubmit(ExpenseData(
+      label: _formValues["label"],
+      amount: double.parse(_formValues["amount"]),
+      category: _formValues["category"],
+      createdAt: DateFormat("MM/dd/yyyy").parse(_formValues["createdAt"]),
+    ));
+
+    Navigator.pop(context);
   }
 
   @override

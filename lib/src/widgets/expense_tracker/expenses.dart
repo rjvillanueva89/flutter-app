@@ -28,10 +28,16 @@ class _ExpensesState extends State<Expenses> {
     )
   ];
 
+  void _addExpense(ExpenseData item) {
+    setState(() {
+      _expenses.add(item);
+    });
+  }
+
   void _openModal() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const ExpenseForm(),
+      builder: (ctx) => ExpenseForm(onSubmit: _addExpense),
     );
   }
 

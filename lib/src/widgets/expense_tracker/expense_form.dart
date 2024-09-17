@@ -6,14 +6,12 @@ class ExpenseForm extends StatefulWidget {
   const ExpenseForm({super.key});
 
   @override
-  State<ExpenseForm> createState() {
-    return _ExpenseFormState();
-  }
+  State<ExpenseForm> createState() => _ExpenseFormState();
 }
 
 class _ExpenseFormState extends State<ExpenseForm> {
   final _formKey = GlobalKey<FormState>();
-
+  final _formValues = {};
   final _dateController = TextEditingController();
 
   @override
@@ -43,7 +41,10 @@ class _ExpenseFormState extends State<ExpenseForm> {
   }
 
   void _handleSubmit() {
-    print(_formKey.currentState!.validate());
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      print(_formValues);
+    }
   }
 
   @override
@@ -68,6 +69,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
                 labelText: "Label",
               ),
               validator: Zod().required("This field is required").build,
+              onSaved: (value) => _formValues["label"] = value,
             ),
             Row(
               children: [
@@ -79,6 +81,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
                       labelText: "Amount",
                     ),
                     validator: Zod().required("This field is required").build,
+                    onSaved: (value) => _formValues["amount"] = value,
                   ),
                 ),
                 const SizedBox(width: 15),
@@ -91,6 +94,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
                     ),
                     onTap: _openDatePicker,
                     validator: Zod().required("This field is required").build,
+                    onSaved: (value) => _formValues["createdAt"] = value,
                   ),
                 ),
               ],
@@ -107,6 +111,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
                     items: categoryItems,
                     onChanged: (value) {},
                     validator: Zod().required("This field is required").build,
+                    onSaved: (value) => _formValues["category"] = value,
                     isExpanded: true,
                   ),
                 ),

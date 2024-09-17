@@ -1,5 +1,6 @@
 import 'package:first_app/src/models/expense_data.dart';
 import 'package:flutter/material.dart';
+import 'package:zod_validation/zod_validation.dart';
 
 class ExpenseForm extends StatefulWidget {
   const ExpenseForm({super.key});
@@ -11,18 +12,20 @@ class ExpenseForm extends StatefulWidget {
 }
 
 class _ExpenseFormState extends State<ExpenseForm> {
-  final _titleController = TextEditingController();
-  final _amountController = TextEditingController();
-  DateTime? _createdAt;
+  final _formKey = GlobalKey<FormState>();
+
+  final _dateController = TextEditingController();
 
   @override
   void dispose() {
-    _titleController.dispose();
-    _amountController.dispose();
+    _dateController.dispose();
+
     super.dispose();
   }
 
   void _openDatePicker() async {
+    FocusScope.of(context).requestFocus(FocusNode());
+
     final now = DateTime.now();
     final minDate = DateTime(now.year - 1, now.month, now.day);
     final pickedDate = await showDatePicker(
@@ -32,77 +35,97 @@ class _ExpenseFormState extends State<ExpenseForm> {
       lastDate: now,
     );
 
+    if (pickedDate == null) return;
+
     setState(() {
-      _createdAt = pickedDate;
+      _dateController.text = formatter.format(pickedDate);
     });
+  }
+
+  void _handleSubmit() {
+    print(_formKey.currentState!.validate());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Column(
-        children: [
-          TextField(
-            controller: _titleController,
-            maxLength: 50,
-            decoration: const InputDecoration(
-              label: Text("Label"),
+    final categoryItems = Category.values
+        .map((category) => DropdownMenuItem(
+              value: category,
+              child: Text(category.name.toUpperCase()),
+            ))
+        .toList();
+
+    return Form(
+      key: _formKey,
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextFormField(
+              maxLength: 50,
+              decoration: const InputDecoration(
+                labelText: "Label",
+              ),
+              validator: Zod().required("This field is required").build,
             ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                  child: TextField(
-                controller: _amountController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  prefixText: '\$ ',
-                  label: Text("Amount"),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      prefixText: '\$ ',
+                      labelText: "Amount",
+                    ),
+                    validator: Zod().required("This field is required").build,
+                  ),
                 ),
-              )),
-              const SizedBox(width: 15),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(_createdAt != null
-                        ? formatter.format(_createdAt!)
-                        : "Select a date"),
-                    IconButton(
-                      onPressed: _openDatePicker,
-                      icon: const Icon(Icons.calendar_month),
-                    )
-                  ],
+                const SizedBox(width: 15),
+                Expanded(
+                  child: TextFormField(
+                    controller: _dateController,
+                    decoration: const InputDecoration(
+                      suffixIcon: Icon(Icons.calendar_month),
+                      labelText: "Date",
+                    ),
+                    onTap: _openDatePicker,
+                    validator: Zod().required("This field is required").build,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 15),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("Cancel"),
-              ),
-              const SizedBox(width: 15),
-              FilledButton(
-                onPressed: () {
-                  print(_titleController.text);
-                  print(_amountController.text);
-                  print(_createdAt != null
-                      ? formatter.format(_createdAt!)
-                      : "No date selected");
-                },
-                child: const Text("Save"),
-              )
-            ],
-          )
-        ],
+              ],
+            ),
+            const SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: DropdownButtonFormField(
+                    decoration: const InputDecoration(
+                      labelText: "Category",
+                    ),
+                    items: categoryItems,
+                    onChanged: (value) {},
+                    validator: Zod().required("This field is required").build,
+                    isExpanded: true,
+                  ),
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Cancel"),
+                ),
+                const SizedBox(width: 15),
+                FilledButton(
+                  onPressed: _handleSubmit,
+                  child: const Text("Save"),
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

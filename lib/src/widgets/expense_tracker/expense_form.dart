@@ -38,9 +38,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
 
     if (pickedDate == null) return;
 
-    setState(() {
-      _dateController.text = formatter.format(pickedDate);
-    });
+    setState(() => _dateController.text = formatter.format(pickedDate));
   }
 
   void _handleSubmit() {

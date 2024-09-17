@@ -7,31 +7,14 @@ class Expenses extends StatefulWidget {
   const Expenses({super.key});
 
   @override
-  State<Expenses> createState() {
-    return _ExpensesState();
-  }
+  State<Expenses> createState() => _ExpensesState();
 }
 
 class _ExpensesState extends State<Expenses> {
-  final List<ExpenseData> _expenses = [
-    ExpenseData(
-      label: "Jollibee",
-      amount: 15,
-      category: Category.food,
-      createdAt: DateTime.now(),
-    ),
-    ExpenseData(
-      label: "Shopee",
-      amount: 20,
-      category: Category.misc,
-      createdAt: DateTime.now(),
-    )
-  ];
+  final List<ExpenseData> _expenses = [];
 
   void _addExpense(ExpenseData item) {
-    setState(() {
-      _expenses.add(item);
-    });
+    setState(() => _expenses.add(item));
   }
 
   void _openModal() {
